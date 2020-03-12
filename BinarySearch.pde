@@ -23,22 +23,56 @@ private Item[] store =
 };                             
 public int linearSearch(int catNumToFind)
 {
-  //complete this method
+  for(int i=0; i<store.length; i++){
+    if(store[i].getCatNum() == catNumToFind){
+        return store[i].getInventory();
+    }
+  }
   return -1;
 }
 public int recursiveLinearSearch(int catNumToFind, int startIndex)
 {
-  //complete this method
-  return -1;
+  int aaa =startIndex;
+  if(store[aaa].getCatNum() == catNumToFind){
+    return store[aaa].getInventory();
+  }else if(startIndex < store.length-1){
+    return recursiveLinearSearch(catNumToFind,  aaa+  1);
+  }else{
+    return -1;
+  }
 }
 public int binarySearch(int catNumToFind)
 {
-  //complete this method    
+  int high = store.length-1;
+  int low = 0;
+  int guess = (low + high)/2;
+  while(low <= high){
+    if(store[(high+low)/2].getCatNum() == catNumToFind){
+      return store[(high+low)/2].getInventory();
+    }else if(store[(high+low)/2].getCatNum() > catNumToFind){
+      high = guess -1;
+      guess = (low + high)/2;
+    }else if(store[(high+low)/2].getCatNum() < catNumToFind){
+      low = guess + 1;
+      guess = (low + high)/2;
+    }
+  }   
   return -1;
 }
 public int recursiveBinarySearch(int catNumToFind, int nLow, int nHigh)
 {
-  //complete this method    
+  int guess = (nHigh+nLow)/2;
+  if(nLow <= nHigh){
+    if(store[((nHigh + nLow)/2)].getCatNum() == catNumToFind){
+      return store[((nHigh + nLow)/2)].getInventory();
+    }else if(store[((nHigh + nLow)/2)].getCatNum() > catNumToFind){
+      return recursiveBinarySearch( catNumToFind, nLow, guess-1);
+    }else if(store[((nHigh + nLow)/2)].getCatNum() < catNumToFind){
+      
+      return recursiveBinarySearch(catNumToFind,guess+1, nHigh);
+    }
+  }
+
   return -1;
 }
 public void setup()
